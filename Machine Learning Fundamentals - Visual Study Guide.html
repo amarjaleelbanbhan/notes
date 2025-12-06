@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Fundamentals - Visual Study Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-light: #e8f0fe;
+            --secondary: #34a853;
+            --secondary-light: #e6f4ea;
+            --accent: #fbbc04;
+            --accent-light: #fef7e0;
+            --text: #202124;
+            --text-secondary: #5f6368;
+            --card-bg: #ffffff;
+            --bg: #f8f9fa;
+            --border: #dadce0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .poster-container {
+            width: 720px;
+            min-height: 1334px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            opacity: 0.4;
+        }
+        
+        .bg-shape-1 {
+            width: 300px;
+            height: 300px;
+            background-color: var(--primary-light);
+            top: -100px;
+            left: -100px;
+        }
+        
+        .bg-shape-2 {
+            width: 250px;
+            height: 250px;
+            background-color: var(--secondary-light);
+            bottom: 200px;
+            right: -50px;
+        }
+        
+        .bg-shape-3 {
+            width: 200px;
+            height: 200px;
+            background-color: var(--accent-light);
+            top: 40%;
+            left: 60%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 80%;
+            margin: 0 auto;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title .material-icons {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card-title {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title .material-icons {
+            margin-right: 8px;
+            font-size: 22px;
+        }
+        
+        .card-content {
+            font-size: 16px;
+        }
+        
+        .highlight {
+            background-color: var(--accent-light);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        
+        .list {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .list li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .formula {
+            background-color: var(--primary-light);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        
+        .image-container {
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-caption {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .two-column {
+            display: flex;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--secondary-light);
+            color: var(--secondary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <!-- Background shapes -->
+        <div class="bg-shape bg-shape-1"></div>
+        <div class="bg-shape bg-shape-2"></div>
+        <div class="bg-shape bg-shape-3"></div>
+        
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Machine Learning Fundamentals</h1>
+            <p class="subtitle">A Visual Study Guide to Understanding Key ML Concepts</p>
+        </header>
+        
+        <!-- Introduction Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="material-icons">lightbulb</span>
+                Introduction to Machine Learning
+            </h2>
+            <div class="card">
+                <div class="card-content">
+                    <p>Machine learning is a subset of AI focused on algorithms that <span class="highlight">learn patterns from training data</span> and make accurate inferences about new data.</p>
+                    <p>Key components:</p>
+                    <ul class="list">
+                        <li>Training data: The dataset used to train the model</li>
+                        <li>Algorithm: The method used to learn patterns</li>
+                        <li>Model: The output of the training process</li>
+                        <li>Predictions: The model's output on new data</li>
+                    </ul>
+                    <p>Example: A Twitter program that learns to filter bullying tweets based on user labeling.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Types of Machine Learning Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="material-icons">category</span>
+                Types of Machine Learning
+            </h2>
+            <div class="card">
+                <div class="card-content">
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/ac737c32f3f7.jpg" alt="Types of Machine Learning">
+                        <p class="image-caption">Types of Machine Learning</p>
+                    </div>
+                    <ul class="list">
+                        <li><strong>Supervised Learning:</strong> Uses labeled data for training
+                            <ul class="list">
+                                <li><span class="tag">Classification</span> Predicts discrete categories (spam/not spam)</li>
+                                <li><span class="tag">Regression</span> Predicts continuous values (house prices)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Unsupervised Learning:</strong> Finds patterns in unlabeled data
+                            <ul class="list">
+                                <li><span class="tag">Clustering</span> Groups similar data points</li>
+                            </ul>
+                        </li>
+                        <li><strong>Semi-Supervised Learning:</strong> Combines labeled and unlabeled data</li>
+                        <li><strong>Self-Supervised Learning:</strong> Creates labels from data itself</li>
+                        <li><strong>Reinforcement Learning:</strong> Learns through interaction with environment</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Supervised Learning Algorithms Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="material-icons">supervised_user_circle</span>
+                Supervised Learning Algorithms
+            </h2>
+            
+            <!-- Linear Regression -->
+            <div class="card">
+                <h3 class="card-title">
+                    <span class="material-icons">trending_up</span>
+                    Linear Regression
+                </h3>
+                <div class="card-content">
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/354aecc3dd1c.png" alt="Linear Regression">
+                        <p class="image-caption">Linear Regression vs Logistic Regression</p>
+                    </div>
+                    <p><strong>Simple Linear Regression:</strong> One independent variable</p>
+                    <div class="formula">Y = mX + b</div>
+                    <ul class="list">
+                        <li>Best fit line minimizes squared errors</li>
+                        <li>Cost function: Mean Squared Error (MSE)</li>
+                    </ul>
+                    <p><strong>Multiple Linear Regression:</strong> Multiple independent variables</p>
+                    <div class="formula">Y = b₀ + b₁X₁ + b₂X₂ + ... + bₙXₙ</div>
+                    <p><strong>Prediction vs Explanation:</strong></p>
+                    <ul class="list">
+                        <li>Prediction: Focus on accuracy with unseen data</li>
+                        <li>Explanation: Focus on understanding relationships</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Logistic Regression -->
+            <div class="card">
+                <h3 class="card-title">
+                    <span class="material-icons">compare_arrows</span>
+                    Logistic Regression
+                </h3>
+                <div class="card-content">
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/ae7b6a5eb656.png" alt="Logistic Regression">
+                        <p class="image-caption">Sigmoid Function in Logistic Regression</p>
+                    </div>
+                    <p>Predicts probability between 0 and 1</p>
+                    <div class="formula">p = 1/(1+e⁻ᶻ)</div>
+                    <p><strong>Decision boundary:</strong> p ≥ 0.5 → Class 1, p < 0.5 → Class 0</p>
+                    <p><strong>Cost function:</strong> Log loss (cross-entropy)</p>
+                    <p><strong>Evaluation metrics:</strong> Accuracy, Precision, Recall, F1 Score</p>
+                </div>
+            </div>
+            
+            <!-- Decision Trees -->
+            <div class="card">
+                <h3 class="card-title">
+                    <span class="material-icons">account_tree</span>
+                    Decision Trees
+                </h3>
+                <div class="card-content">
+                    <p>Flowchart-like structure for decision making</p>
+                    <p><strong>Splitting criteria:</strong></p>
+                    <ul class="list">
+                        <li><strong>Gini Impurity:</strong> Measures node impurity</li>
+                        <li><strong>Entropy:</strong> Measures information gain</li>
+                        <li><strong>Information Gain:</strong> Entropy(parent) - Weighted Entropy(children)</li>
+                    </ul>
+                    <p><strong>Recursive partitioning</strong> until stopping criteria met</p>
+                    <p><strong>Overfitting prevention:</strong> Maximum depth, minimum node size</p>
+                </div>
+            </div>
+            
+            <!-- Naive Bayes -->
+            <div class="card">
+                <h3 class="card-title">
+                    <span class="material-icons">functions</span>
+                    Naive Bayes
+                </h3>
+                <div class="card-content">
+                    <p>Based on Bayes' Theorem:</p>
+                    <div class="formula">P(y|X) = P(X|y)P(y)/P(X)</div>
+                    <p><strong>"Naive" assumption:</strong> Features are conditionally independent</p>
+                    <p><strong>Types:</strong></p>
+                    <ul class="list">
+                        <li><strong>Gaussian:</strong> Continuous values</li>
+                        <li><strong>Multinomial:</strong> Frequency of terms</li>
+                        <li><strong>Bernoulli:</strong> Binary features</li>
+                    </ul>
+                    <p>Works well for text classification and spam filtering</p>
+                </div>
+            </div>
+            
+            <!-- K-Nearest Neighbors -->
+            <div class="card">
+                <h3 class="card-title">
+                    <span class="material-icons">share</span>
+                    K-Nearest Neighbors (KNN)
+                </h3>
+                <div class="card-content">
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/1caab1d73431.png" alt="KNN Algorithm">
+                        <p class="image-caption">KNN Classification with Different K Values</p>
+                    </div>
+                    <p>Non-parametric, instance-based learning</p>
+                    <p><strong>Classification:</strong> Majority vote of k nearest neighbors</p>
+                    <p><strong>Regression:</strong> Average of k nearest neighbors</p>
+                    <p><strong>Distance metrics:</strong></p>
+                    <ul class="list">
+                        <li><strong>Euclidean:</strong> Straight-line distance</li>
+                        <li><strong>Manhattan:</strong> Sum of absolute differences</li>
+                    </ul>
+                    <p><strong>Choosing k:</strong> Small k → sensitive to noise, Large k → smoother boundary</p>
+                    <p><strong>Feature scaling is crucial</strong> (Z-score normalization)</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Data and Sampling Distributions Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="material-icons">bar_chart</span>
+                Data and Sampling Distributions
+            </h2>
+            <div class="card">
+                <div class="card-content">
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/84c5be70d791.png" alt="Central Limit Theorem">
+                        <p class="image-caption">Central Limit Theorem Visualization</p>
+                    </div>
+                    <p><strong>Random Sampling vs Sample Bias</strong></p>
+                    <p><strong>Central Limit Theorem:</strong> Distribution of sample means approximates normal</p>
+                    <div class="formula">SE = s/√n</div>
+                    <p><strong>Bootstrap:</strong> Resampling with replacement to estimate sampling distribution</p>
+                    <p><strong>Confidence Intervals:</strong> Range likely to contain true population parameter</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Ensemble Methods Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="material-icons">view_comfy</span>
+                Ensemble Methods
+            </h2>
+            <div class="card">
+                <div class="card-content">
+                    <div class="image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/5b5a92ef7ae9.jpg" alt="Bagging vs Random Forest">
+                        <p class="image-caption">Decision Tree vs Random Forest</p>
+                    </div>
+                    <p><strong>Bagging (Bootstrap Aggregation):</strong></p>
+                    <ul class="list">
+                        <li>Creates multiple datasets using bootstrapping</li>
+                        <li>Trains separate models on each dataset</li>
+                        <li>Combines predictions (average or majority vote)</li>
+                    </ul>
+                    <p><strong>Random Forest:</strong></p>
+                    <ul class="list">
+                        <li>Bagging + Random feature selection</li>
+                        <li>Each tree selects random subset of features</li>
+                        <li>Reduces variance and improves accuracy</li>
+                        <li>Variable importance measurement</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Evaluation Metrics Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="material-icons">analytics</span>
+                Evaluation Metrics
+            </h2>
+            <div class="card">
+                <div class="card-content">
+                    <div class="two-column">
+                        <div class="column">
+                            <p><strong>Classification:</strong></p>
+                            <ul class="list">
+                                <li>Confusion Matrix</li>
+                                <li>Accuracy, Precision, Recall, F1 Score</li>
+                                <li>ROC Curve and AUC</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <p><strong>Regression:</strong></p>
+                            <ul class="list">
+                                <li>Mean Squared Error (MSE)</li>
+                                <li>Root Mean Squared Error (RMSE)</li>
+                                <li>R-squared (R²)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+# Jekyll Configuration for Study Notes
+title: Computer Science Study Materials
+description: Exam preparation guides, cheat sheets, and comprehensive study materials
+author: Amar Jaleel
+lang: en
+
+# GitHub Pages settings
+github: [metadata]
+markdown: kramdown
+
+# Theme
+theme: jekyll-theme-slate
+
+# Exclude files
+exclude:
+  - .gitignore
+  - README.md
+  - .git
+  - .github
+
+# Collections
+collections:
+  notes:
+    output: true
+    permalink: /:collection/:path/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag

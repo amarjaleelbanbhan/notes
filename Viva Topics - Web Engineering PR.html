@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Engineering Viva Study Notes</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=ZCOOL+KuaiLe&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Kalam', cursive;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .poster-container {
+            width: 720px;
+            min-height: 1334px;
+            margin: 0 auto;
+            background-color: #fffbe9;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* Lined paper effect */
+        .lined-paper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 28px,
+                #e0e0e0 28px,
+                #e0e0e0 29px
+            );
+            z-index: 1;
+        }
+        
+        .red-margin {
+            position: absolute;
+            top: 0;
+            left: 60px;
+            width: 3px;
+            height: 100%;
+            background-color: #ff6b6b;
+            z-index: 2;
+        }
+        
+        .content {
+            position: relative;
+            padding: 40px 80px;
+            z-index: 3;
+        }
+        
+        .title {
+            font-family: 'ZCOOL QingKe HuangYou', cursive;
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff6b6b, transparent);
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'ZCOOL KuaiLe', cursive;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title .material-icons {
+            margin-right: 10px;
+            color: #3498db;
+        }
+        
+        .content-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 22px;
+        }
+        
+        .content-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+        
+        /* Yellow highlight effect */
+        .highlight {
+            background: linear-gradient(transparent 40%, rgba(255, 236, 179, 0.7) 40%, rgba(255, 236, 179, 0.7) 90%, transparent 90%);
+            padding: 0 3px;
+            display: inline;
+        }
+        
+        /* Red circle for dates */
+        .date-circle {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .date-circle::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid #ff5252;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        /* Doodle styles */
+        .doodle {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            z-index: 2;
+        }
+        
+        .web-doodle {
+            top: 100px;
+            right: 40px;
+            transform: rotate(5deg);
+        }
+        
+        .css-doodle {
+            top: 400px;
+            right: 40px;
+            transform: rotate(-3deg);
+        }
+        
+        .js-doodle {
+            top: 700px;
+            right: 40px;
+            transform: rotate(2deg);
+        }
+        
+        .dom-doodle {
+            top: 1000px;
+            right: 40px;
+            transform: rotate(-4deg);
+        }
+        
+        .react-doodle {
+            top: 1300px;
+            right: 40px;
+            transform: rotate(3deg);
+        }
+        
+        .node-doodle {
+            top: 1600px;
+            right: 40px;
+            transform: rotate(-2deg);
+        }
+        
+        .doodle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2));
+        }
+        
+        /* Handwritten note effect */
+        .note {
+            position: relative;
+            transform: rotate(-1deg);
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            font-style: italic;
+        }
+        
+        .note::before {
+            content: "💡";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            font-size: 24px;
+        }
+        
+        /* Paper tape effect */
+        .tape {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: rotate(-5deg);
+            z-index: 4;
+        }
+        
+        .tape-1 {
+            top: 30px;
+            right: 70px;
+        }
+        
+        .tape-2 {
+            top: 330px;
+            right: 70px;
+        }
+        
+        .tape-3 {
+            top: 630px;
+            right: 70px;
+        }
+        
+        .tape-4 {
+            top: 930px;
+            right: 70px;
+        }
+        
+        .tape-5 {
+            top: 1230px;
+            right: 70px;
+        }
+        
+        .tape-6 {
+            top: 1530px;
+            right: 70px;
+        }
+        
+        /* Hand drawn circle */
+        .circle {
+            position: absolute;
+            border: 2px solid #ff5252;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            transform: rotate(-5deg);
+        }
+        
+        .circle-1 {
+            top: 115px;
+            left: 220px;
+        }
+        
+        .circle-2 {
+            top: 815px;
+            left: 420px;
+        }
+        
+        /* Arrow */
+        .arrow {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            z-index: 2;
+        }
+        
+        .arrow-1 {
+            top: 450px;
+            left: 500px;
+            transform: rotate(30deg);
+        }
+        
+        .arrow-2 {
+            top: 1050px;
+            left: 300px;
+            transform: rotate(-15deg);
+        }
+        
+        /* Subtle grid background */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <div class="grid-bg"></div>
+        <div class="lined-paper"></div>
+        <div class="red-margin"></div>
+        
+        <div class="content">
+            <h1 class="title">Web Engineering Viva Study Notes</h1>
+            
+            <!-- Introduction to Web Structure -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">language</i>
+                    Introduction to Web Structure
+                </h2>
+                <div class="content-item"><span class="highlight">Hypertext</span> - Text with hyperlinks that connect to other content</div>
+                <div class="content-item"><span class="highlight">HTTP</span> - Protocol for transferring hypertext requests and information</div>
+                <div class="content-item"><span class="highlight">IP Address</span> - Unique numerical label assigned to devices</div>
+                <div class="content-item"><span class="highlight">IPv4 vs IPv6</span> - IPv4: 32-bit addresses (e.g., 192.168.1.1), IPv6: 128-bit addresses</div>
+                <div class="content-item"><span class="highlight">Website vs Web Application</span> - Website: informational, Web App: interactive functionality</div>
+                <div class="content-item"><span class="highlight">Domain Name Structure</span> - Top-level, second-level, subdomain structure</div>
+                <div class="content-item"><span class="highlight">Web Request-Response Cycle</span> - Browser sends request, server processes and returns response</div>
+                
+                <div class="note">Remember: HTTP is stateless - each request is independent!</div>
+            </div>
+            
+            <!-- Introduction to CSS -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">style</i>
+                    Introduction to CSS
+                </h2>
+                <div class="content-item"><span class="highlight">CSS Documents & The Cascade</span> - Multiple stylesheets cascade with specificity rules</div>
+                <div class="content-item"><span class="highlight">Selectors, Properties & Values</span> - Target elements, apply styles with specific values</div>
+                <div class="content-item"><span class="highlight">Classes & IDs</span> - Class: reusable, ID: unique element identifier</div>
+                <div class="content-item"><span class="highlight">Specificity in CSS</span> - ID > Class > Element > Universal selector</div>
+                <div class="content-item"><span class="highlight">Flex Box</span> - One-dimensional layout model for arranging elements</div>
+                <div class="content-item"><span class="highlight">Length Units</span> - px (pixels), % (percentage), rem (root em), em (relative), vh (viewport height)</div>
+                <div class="content-item"><span class="highlight">The Box Model</span> - Content, Padding, Border, Margin</div>
+                <div class="content-item"><span class="highlight">Position Property</span> - static, relative, absolute, fixed, sticky</div>
+                <div class="content-item"><span class="highlight">CSS Pseudo Classes</span> - :hover, :active, :focus, :first-child, etc.</div>
+                
+                <div class="note">Flexbox is perfect for responsive layouts!</div>
+            </div>
+            
+            <!-- Introduction to JavaScript -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">code</i>
+                    Introduction to JavaScript
+                </h2>
+                <div class="content-item"><span class="highlight">Variables & Const Variables</span> - let (reassignable), const (immutable), var (function-scoped)</div>
+                <div class="content-item"><span class="highlight">Numbers & Strings</span> - Primitive data types for numeric and text values</div>
+                <div class="content-item"><span class="highlight">Booleans & Type Conversion</span> - true/false values, implicit/explicit type conversion</div>
+                <div class="content-item"><span class="highlight">Arrays</span> - Ordered collection of values, zero-indexed</div>
+                <div class="content-item"><span class="highlight">Objects</span> - Key-value pairs for storing structured data</div>
+                <div class="content-item"><span class="highlight">Operators</span> - Arithmetic, Relational, Increment & Decrement</div>
+                <div class="content-item"><span class="highlight">Conditional Statements</span> - if, else-if, switch with logical operators (&&, ||)</div>
+                <div class="content-item"><span class="highlight">Loops</span> - for, while, do-while, for...of, for...in</div>
+                <div class="content-item"><span class="highlight">Functions</span> - Reusable blocks of code, can take parameters and return values</div>
+                
+                <div class="note">Arrow functions (=>) have different 'this' binding than regular functions!</div>
+            </div>
+            
+            <!-- Introduction to DOM -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">account_tree</i>
+                    Introduction to DOM
+                </h2>
+                <div class="content-item"><span class="highlight">DOM (Document Object Model)</span> - Programming interface for HTML documents</div>
+                <div class="content-item"><span class="highlight">querySelector</span> - Returns first element matching CSS selector</div>
+                <div class="content-item"><span class="highlight">querySelectorAll</span> - Returns all elements matching CSS selector</div>
+                <div class="content-item"><span class="highlight">getElementById</span> - Returns element with specific ID</div>
+                <div class="content-item"><span class="highlight">getElementsByTagName</span> - Returns collection of elements with specific tag name</div>
+                <div class="content-item"><span class="highlight">getElementsByClassName</span> - Returns collection of elements with specific class</div>
+                <div class="content-item"><span class="highlight">DOM Manipulation</span> - Changing content, structure, and style of documents</div>
+                <div class="content-item"><span class="highlight">Changing Attributes & Values</span> - element.setAttribute(), element.value</div>
+                <div class="content-item"><span class="highlight">Add, Create & Remove Elements</span> - createElement(), appendChild(), removeChild()</div>
+                
+                <div class="note">querySelector is more versatile but getElementById is faster!</div>
+            </div>
+            
+            <!-- HTML Manipulation -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">html</i>
+                    HTML Manipulation
+                </h2>
+                <div class="content-item"><span class="highlight">Getting & Setting Values</span> - element.value, element.textContent, element.innerHTML</div>
+                <div class="content-item"><span class="highlight">Handling Attributes</span> - getAttribute(), setAttribute(), removeAttribute()</div>
+                <div class="content-item"><span class="highlight">Inserting/Removing Elements</span> - insertBefore(), appendChild(), remove()</div>
+                <div class="content-item"><span class="highlight">CSS Manipulations</span> - element.style, element.classList</div>
+                
+                <div class="note">innerHTML can be a security risk with user input - use textContent instead!</div>
+            </div>
+            
+            <!-- ES6 Features -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">upgrade</i>
+                    ES6 Features
+                </h2>
+                <div class="content-item"><span class="highlight">Arrow Function</span> - Concise syntax: (param) => { return value; }</div>
+                <div class="content-item"><span class="highlight">Template Literal</span> - String interpolation with backticks: `Hello ${name}`</div>
+                
+                <div class="note">ES6 (ECMAScript 2015) introduced many modern JavaScript features!</div>
+            </div>
+            
+            <!-- Introduction to React.js -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">react</i>
+                    Introduction to React.js
+                </h2>
+                <div class="content-item"><span class="highlight">Core Features</span> - Component-based, Virtual DOM, Unidirectional data flow</div>
+                <div class="content-item"><span class="highlight">Thinking in React.js</span> - Break UI into components, build static version, add state</div>
+                <div class="content-item"><span class="highlight">Building App Using Components</span> - Reusable UI pieces with props and state</div>
+                <div class="content-item"><span class="highlight">Creating Custom Components</span> - Functional components with hooks or class components</div>
+                <div class="content-item"><span class="highlight">Create Hello World App</span> - Basic React app structure with JSX</div>
+                <div class="content-item"><span class="highlight">Routing in React.js</span> - BrowserRouter, Routes, Route for navigation</div>
+                
+                <div class="note">React uses JSX - JavaScript syntax extension that looks like HTML!</div>
+            </div>
+            
+            <!-- Introduction to Node.js -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="material-icons">dns</i>
+                    Introduction to Node.js
+                </h2>
+                <div class="content-item"><span class="highlight">Node.js</span> - JavaScript runtime built on Chrome's V8 engine</div>
+                <div class="content-item"><span class="highlight">Setup Development Environment</span> - Install Node.js, choose code editor</div>
+                <div class="content-item"><span class="highlight">Node.js Console</span> - REPL (Read-Eval-Print-Loop) for testing code</div>
+                <div class="content-item"><span class="highlight">Node Package Manager (NPM)</span> - Package manager for Node.js modules</div>
+                <div class="content-item"><span class="highlight">Installing Packages Locally</span> - npm install package-name</div>
+                
+                <div class="note">Node.js allows JavaScript to run outside the browser!</div>
+            </div>
+            
+            <div class="content-item" style="text-align: center; margin-top: 40px; font-style: italic;">
+                Lecturer: Sammar Abbas
+            </div>
+        </div>
+        
+        <!-- Doodles -->
+        <div class="doodle web-doodle">
+            <img src="https://sfile.chatglm.cn/images-ppt/c24f9a3c174a.jpg" alt="Web Structure Diagram">
+        </div>
+        
+        <div class="doodle css-doodle">
+            <img src="https://sfile.chatglm.cn/images-ppt/d774f7bb6638.png" alt="CSS Box Model">
+        </div>
+        
+        <div class="doodle js-doodle">
+            <img src="https://sfile.chatglm.cn/images-ppt/dd04011d6c3c.jpg" alt="JavaScript Code">
+        </div>
+        
+        <div class="doodle dom-doodle">
+            <img src="https://sfile.chatglm.cn/images-ppt/9e877d364d38.jpg" alt="DOM Tree Structure">
+        </div>
+        
+        <div class="doodle react-doodle">
+            <img src="https://sfile.chatglm.cn/images-ppt/e27bb601bfae.png" alt="React Components">
+        </div>
+        
+        <div class="doodle node-doodle">
+            <img src="https://sfile.chatglm.cn/images-ppt/b407b3c62414.jpg" alt="Node.js Logo">
+        </div>
+        
+        <!-- Paper tapes -->
+        <div class="tape tape-1"></div>
+        <div class="tape tape-2"></div>
+        <div class="tape tape-3"></div>
+        <div class="tape tape-4"></div>
+        <div class="tape tape-5"></div>
+        <div class="tape tape-6"></div>
+        
+        <!-- Hand drawn circles -->
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        
+        <!-- Arrows -->
+        <div class="arrow arrow-1">
+            <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5,20 L60,20" stroke="#ff5252" stroke-width="2" fill="none"/>
+                <path d="M60,20 L50,10 M60,20 L50,30" stroke="#ff5252" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+        
+        <div class="arrow arrow-2">
+            <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5,20 L60,20" stroke="#3498db" stroke-width="2" fill="none"/>
+                <path d="M60,20 L50,10 M60,20 L50,30" stroke="#3498db" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+    </div>
+</body>
+</html>
